@@ -15,13 +15,56 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Components\ActiveSearch\Index.cshtml" />
-      <AdditionalFiles Include="Components\ActiveSearch\_searchResult.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\ActiveSearch\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\ActiveSearch\_searchResult.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ajax-header.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ajax-header.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\alpine-morph.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\alpine-morph.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\class-tools.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\class-tools.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\client-side-templates.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\client-side-templates.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\debug.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\debug.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\disable-element.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\disable-element.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\event-header.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\event-header.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\head-support.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\head-support.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\include-vals.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\include-vals.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\json-enc.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\json-enc.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\loading-states.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\loading-states.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\method-override.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\method-override.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\morphdom-swap.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\morphdom-swap.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\multi-swap.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\multi-swap.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-deps.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-deps.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-params.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-params.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\preload.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\preload.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\rails-method.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\rails-method.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\remove-me.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\remove-me.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\response-targets.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\response-targets.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\restored.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\restored.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\sse.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\sse.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ws.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ws.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\htmx.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\htmx.min.js" />
     </ItemGroup>
 
 </Project>
