@@ -7,7 +7,7 @@
 
     <tr class="@(c.Updated ? statusClass : "")">
         <td>
-            <input id="@c.Id" type='checkbox' name='ids' value='@c.Id' unchecked>
+            <input id="@c.Id" type='checkbox' name='ids' value='@c.Id'>
             <input type="hidden" asp-for="@c.Id"/>
         </td>
         <td>@c.Name</td>

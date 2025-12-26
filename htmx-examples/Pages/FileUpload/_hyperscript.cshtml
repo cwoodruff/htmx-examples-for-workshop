@@ -1,7 +1,7 @@
 ﻿@model IFormFile
 
 <form hx-encoding='multipart/form-data' hx-post='/FileUpload/index?handler=upload2'
-      _='on htmx:xhr:progress(loaded, total) set #progress.value to (loaded/total)*100'>
+      hx-on:htmx:xhr:progress="htmx.find('#progress').setAttribute('value', event.detail.loaded / event.detail.total * 100)">
 
     <input name="UploadedFile2" asp-for="@Model">
 

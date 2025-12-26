@@ -21,26 +21,26 @@ public class Index : PageModel
 
 
     [ValidateAntiForgeryToken]
-    public PartialViewResult OnPutActivate(int[] Ids)
+    public PartialViewResult OnPutActivate(int[] ids)
     {
-        foreach (var Id in Ids)
-            service.Update(Id, true);
+        foreach (var id in ids)
+            service.Update(id, true);
         var models = service.Get();
         foreach (var m in models)
-            if (Ids.Contains(m.Id))
+            if (ids.Contains(m.Id))
                 m.Updated = true;
             else m.Updated = false;
         return Partial("_tbody", models.ToList());
     }
 
     [ValidateAntiForgeryToken]
-    public PartialViewResult OnPutDeactivate(int[] Ids)
+    public PartialViewResult OnPutDeactivate(int[] ids)
     {
-        foreach (var Id in Ids)
-            service.Update(Id, false);
+        foreach (var id in ids)
+            service.Update(id, false);
         var models = service.Get();
         foreach (var m in models)
-            if (Ids.Contains(m.Id))
+            if (ids.Contains(m.Id))
                 m.Updated = true;
             else m.Updated = false;
 

@@ -6,18 +6,7 @@
     <td>
         <button class="btn btn-danger"
                 hx-get="/EditRow/edit/@Model.Id"
-                hx-trigger="edit" _="on click
-                     if .editing is not empty
-                       Swal.fire({title: 'You are editing another row',
-                                  showCancelButton: true,
-                                  confirmButtonText: 'Edit this row',
-                                  text:'You are already editing a row.  Cancel and continue with @Model.Name?'})
-                       if the result's isConfirmed is false
-                         halt
-                       end
-                       send cancel to .editing
-                     end
-                     trigger edit">
+                hx-trigger="click">
             Edit
         </button>
     </td>
