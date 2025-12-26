@@ -2,6 +2,11 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+document.body.addEventListener('htmx:configRequest', (event) => {
+    let token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+    event.detail.headers['RequestVerificationToken'] = token;
+});
+
 // Call the dataTables jQuery plugin
 $(document).ready(function () {
     $('#dataTable').DataTable();

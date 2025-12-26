@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,19 +6,13 @@ namespace htmx_examples.Pages.ProgressBar;
 public class IndexModel : PageModel
 {
     public static int percent { get; set; } = 0;
-    readonly IAntiforgery _antiforgery;
 
-    public string? RequestToken { get; set; }
-
-    public IndexModel(IAntiforgery antiforgery)
+    public IndexModel()
     {
-        _antiforgery = antiforgery;
     }
 
     public void OnGet()
     {
-        var tokenSet = _antiforgery.GetAndStoreTokens(HttpContext);
-        RequestToken = tokenSet.RequestToken;
     }
 
     public void OnPost()
