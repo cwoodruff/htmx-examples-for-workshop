@@ -20,6 +20,7 @@ public class Index : PageModel
     }
 
 
+    [ValidateAntiForgeryToken]
     public PartialViewResult OnPutActivate(int[] Ids)
     {
         foreach (var Id in Ids)
@@ -32,6 +33,7 @@ public class Index : PageModel
         return Partial("_tbody", models.ToList());
     }
 
+    [ValidateAntiForgeryToken]
     public PartialViewResult OnPutDeactivate(int[] Ids)
     {
         foreach (var Id in Ids)

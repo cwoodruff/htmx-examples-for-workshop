@@ -15,7 +15,6 @@
         <label asp-for="@Model.Email" class="control-label">Email Address</label>
         <input asp-for="@Model.Email">
     </div>
-    @Html.AntiForgeryToken()
     <button class="btn btn-primary">Submit</button>
     <button class="btn btn-primary" hx-get="/ClickToEdit/Index?handler=DisplayContact">Cancel</button>
 </form>

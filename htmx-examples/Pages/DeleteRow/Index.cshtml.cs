@@ -26,6 +26,7 @@ public class IndexModel : PageModel
         return new OkResult();
     }
 
+    [ValidateAntiForgeryToken]
     public IActionResult OnDeleteContact()
     {
         contactService.Delete(this.Id);

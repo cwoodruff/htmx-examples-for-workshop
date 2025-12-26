@@ -12,6 +12,7 @@ public class IndexModel : PageModel
 
     [BindProperty, Display(Name = "File")] public IFormFile UploadedFile { get; set; }
 
+    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostUpload()
     {
         Task.Delay(1200);
@@ -19,6 +20,7 @@ public class IndexModel : PageModel
         return Partial("_javascript", UploadedFile);
     }
 
+    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostUpload2()
     {
         Task.Delay(1200);

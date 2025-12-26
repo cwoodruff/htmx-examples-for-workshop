@@ -27,7 +27,7 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody hx-target="closest tr" hx-swap="outerHTML" hx-headers='{"RequestVerificationToken": "@Model.RequestToken"}'>
+                            <tbody hx-target="closest tr" hx-swap="outerHTML">
                             @foreach (var contact in Model.Contacts)
                             {
                                 <partial name="_TableRow" model="@contact"/>

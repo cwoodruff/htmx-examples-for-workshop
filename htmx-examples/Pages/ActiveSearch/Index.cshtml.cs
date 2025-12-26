@@ -1,5 +1,4 @@
 using System.Text.Json.Nodes;
-using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,26 +7,20 @@ namespace htmx_examples.Pages.ActiveSearch;
 public class IndexModel : PageModel
 {
     private readonly HttpClient _httpClient;
-    readonly IAntiforgery _antiforgery;
-    public string? RequestToken { get; set; }
 
-    public IndexModel(IHttpClientFactory factory, IAntiforgery antiforgery)
+    public IndexModel(IHttpClientFactory factory)
     {
         _httpClient = factory.CreateClient();
-        _antiforgery = antiforgery;
     }
 
     public void OnGet()
     {
-        var tokenSet = _antiforgery.GetAndStoreTokens(HttpContext);
-
-        RequestToken = tokenSet.RequestToken;
-        ;
     }
 
     [BindProperty] public string SearchText { get; set; }
     public List<Country> Countries { get; set; }
 
+    [ValidateAntiForgeryToken]
     public async Task<PartialViewResult> OnPostSearch()
     {
         Countries = new();

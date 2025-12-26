@@ -1,7 +1,6 @@
 ﻿@model IFormFile
 
 <form id='form' hx-encoding='multipart/form-data' hx-post='/FileUpload/index?handler=upload'>
-    @Html.AntiForgeryToken()
     <input name="UploadedFile" asp-for="@Model">
     <button class="btn btn-primary">
         Upload

@@ -15,6 +15,7 @@ public class IndexModel : PageModel
         Contact = new Contact("First", "Last", "name@example.com");
     }
 
+    [ValidateAntiForgeryToken]
     public IActionResult OnPost(Contact contact)
     {
         // This method runs when a POST request is made to the page.
@@ -36,6 +37,7 @@ public class IndexModel : PageModel
         return Page();
     }
 
+    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostEmail(string email)
     {
         if (String.IsNullOrEmpty(email) || !email.Contains('@'))

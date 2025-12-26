@@ -25,6 +25,7 @@ public class Index : PageModel
         return Page();
     }
 
+    [ValidateAntiForgeryToken]
     public IActionResult OnPutReplaceContact(Contact model)
     {
         // This method runs when a POST request is made to the page.

@@ -50,6 +50,7 @@ public class IndexModel : PageModel
     }
 
 
+    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostStartJob()
     {
         if (percent == 0)
