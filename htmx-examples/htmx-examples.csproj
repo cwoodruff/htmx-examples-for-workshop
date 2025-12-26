@@ -69,6 +69,8 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\sweetalert2\sweetalert2.all.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\sweetalert2\sweetalert2.all.min.js" />
     </ItemGroup>
 
 </Project>
