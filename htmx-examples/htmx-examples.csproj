@@ -1,70 +1,74 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>htmx_examples</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Lib.AspNetCore.ServerSentEvents" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.8"/>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
-        <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.21.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Pages\ActiveSearch\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Pages\ActiveSearch\_searchResult.cshtml" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ajax-header.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ajax-header.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\alpine-morph.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\alpine-morph.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\class-tools.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\class-tools.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\client-side-templates.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\client-side-templates.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\debug.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\debug.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\disable-element.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\disable-element.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\event-header.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\event-header.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\head-support.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\head-support.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\include-vals.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\include-vals.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\json-enc.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\json-enc.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\loading-states.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\loading-states.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\method-override.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\method-override.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\morphdom-swap.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\morphdom-swap.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\multi-swap.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\multi-swap.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-deps.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-deps.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-params.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\path-params.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\preload.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\preload.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\rails-method.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\rails-method.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\remove-me.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\remove-me.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\response-targets.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\response-targets.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\restored.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\restored.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\sse.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\sse.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ws.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\ext\ws.min.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\htmx.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\lib\htmx\htmx.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery-validation\LICENSE.md" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.map" />
+      <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace htmx_examples.Pages.ClickToLoad;
+﻿namespace htmx_examples.Pages.ClickToLoad;
 
 public class Contact
 {

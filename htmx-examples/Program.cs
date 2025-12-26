@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container.// Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services
     .AddSingleton<htmx_examples.Pages.ClickToEdit.IContactService, htmx_examples.Pages.ClickToEdit.ContactService>();
@@ -12,8 +12,8 @@ builder.Services
     .AddSingleton<htmx_examples.Pages.EditRow.IContactService, htmx_examples.Pages.EditRow.ContactService>();
 builder.Services.AddRazorPages();
 builder.Services.AddRazorComponents();
-builder.Services.AddControllers();
 builder.Services.AddAntiforgery();
+
 
 var app = builder.Build();
 
@@ -26,14 +26,13 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseAntiforgery();
 
-app.MapControllers();
-app.MapRazorPages();
+app.MapStaticAssets();
+app.MapRazorPages()
+    .WithStaticAssets();
 
 app.Run();
