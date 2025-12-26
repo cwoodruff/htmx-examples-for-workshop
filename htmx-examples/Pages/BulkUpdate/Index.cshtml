@@ -21,7 +21,7 @@
                     <button class="btn btn-primary btn-icon-split" hx-put="/BulkUpdate/Index?handler=deactivate">Deactivate</button>
                 </div>
 
-                @if (Model.ContactTableRows != null && Model.ContactTableRows.Count() > 0)
+                @if (Model.ContactTableRows != null && Model.ContactTableRows.Any())
                 {
                     <form id="checked-contacts">
                         <table>
@@ -35,7 +35,7 @@
                             </thead>
 
                             <tbody id="tbody">
-                            <partial name="BulkUpdate/_tbody" model="@Model.ContactTableRows"/>
+                            <partial name="./_tbody" model="@Model.ContactTableRows"/>
                             </tbody>
                         </table>
                     </form>
