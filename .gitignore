@@ -419,4 +419,21 @@ FodyWeavers.xsd
 .DS_Store
 /htmx-examples/.idea
 /.idea
-DS_Store
+
+# Linux
+.*
+*~ 
+
+# Windows 
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Web dev
+.tmp
+node_modules
