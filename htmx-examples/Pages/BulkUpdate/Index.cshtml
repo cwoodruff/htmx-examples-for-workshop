@@ -24,6 +24,7 @@
                 @if (Model.ContactTableRows != null && Model.ContactTableRows.Any())
                 {
                     <form id="checked-contacts">
+                        @Html.AntiForgeryToken()
                         <table>
                             <thead>
                             <tr>

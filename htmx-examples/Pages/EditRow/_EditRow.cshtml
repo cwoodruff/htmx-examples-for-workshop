@@ -4,6 +4,7 @@
     <td>
         <input type="hidden" asp-for="@Model.Id"/>
         <input name='name' asp-for="@Model.Name">
+        @Html.AntiForgeryToken()
     </td>
     <td>
         <input name='email' asp-for="@Model.Email">

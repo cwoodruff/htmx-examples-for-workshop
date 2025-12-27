@@ -2,6 +2,7 @@
 
 <form id='form' hx-encoding='multipart/form-data' hx-post='/FileUpload/index?handler=upload'
       hx-on:htmx:xhr:progress="htmx.find('#js_progress').setAttribute('value', event.detail.loaded / event.detail.total * 100)">
+    @Html.AntiForgeryToken()
     <input name="UploadedFile" asp-for="@Model">
     <button class="btn btn-primary">
         Upload
