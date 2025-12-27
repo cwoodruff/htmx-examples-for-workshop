@@ -3,8 +3,10 @@
 
 // Write your JavaScript code.
 document.body.addEventListener('htmx:configRequest', (event) => {
-    let token = document.querySelector('input[name="__RequestVerificationToken"]').value;
-    event.detail.headers['RequestVerificationToken'] = token;
+    let tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+    if (tokenElement) {
+        event.detail.parameters['__RequestVerificationToken'] = tokenElement.value;
+    }
 });
 
 // Call the dataTables jQuery plugin
