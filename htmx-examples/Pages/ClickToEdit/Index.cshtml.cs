@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.ClickToEdit;
 
+[ValidateAntiForgeryToken]
 public class Index : PageModel
 {
     private IContactService contactService;
@@ -25,7 +26,6 @@ public class Index : PageModel
         return Page();
     }
 
-    [ValidateAntiForgeryToken]
     public IActionResult OnPutReplaceContact(Contact model)
     {
         // This method runs when a POST request is made to the page.

@@ -3,17 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.DeleteRow;
 
-public class IndexModel : PageModel
+[ValidateAntiForgeryToken]
+public class IndexModel(IContactService contactService) : PageModel
 {
-    IContactService contactService;
-
     public IList<Contact>? Contacts { get; set; }
     [FromQuery(Name = "Id")] public int Id { get; set; }
-
-    public IndexModel(IContactService contactService)
-    {
-        this.contactService = contactService;
-    }
 
     public void OnGet()
     {
@@ -26,7 +20,6 @@ public class IndexModel : PageModel
         return new OkResult();
     }
 
-    [ValidateAntiForgeryToken]
     public IActionResult OnDeleteContact()
     {
         contactService.Delete(this.Id);

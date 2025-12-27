@@ -2,16 +2,9 @@
 
 namespace htmx_examples.Pages.InfiniteScroll;
 
-public class Contact
+public class Contact(string v1, string v2, Guid newGuid)
 {
-    public Contact(string v1, string v2, Guid newGuid)
-    {
-        this.Name = v1;
-        this.Email = v2;
-        this.UniqueIdentifier = newGuid.ToString();
-    }
-
-    public string? Name { get; set; }
-    public string? Email { get; set; }
-    [DisplayName("ID")] public string? UniqueIdentifier { get; set; }
+    public string? Name { get; set; } = v1;
+    public string? Email { get; set; } = v2;
+    [DisplayName("ID")] public string? UniqueIdentifier { get; set; } = newGuid.ToString();
 }

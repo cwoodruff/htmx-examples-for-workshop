@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.ProgressBar;
 
+[ValidateAntiForgeryToken]
 public class IndexModel : PageModel
 {
     public static int percent { get; set; } = 0;
@@ -50,7 +51,6 @@ public class IndexModel : PageModel
     }
 
 
-    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostStartJob()
     {
         if (percent == 0)

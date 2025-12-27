@@ -4,14 +4,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.ActiveSearch;
 
-public class IndexModel : PageModel
+[ValidateAntiForgeryToken]
+public class IndexModel(IHttpClientFactory factory) : PageModel
 {
-    private readonly HttpClient _httpClient;
-
-    public IndexModel(IHttpClientFactory factory)
-    {
-        _httpClient = factory.CreateClient();
-    }
+    private readonly HttpClient _httpClient = factory.CreateClient();
 
     public void OnGet()
     {
@@ -20,7 +16,6 @@ public class IndexModel : PageModel
     [BindProperty] public string SearchText { get; set; }
     public List<Country> Countries { get; set; }
 
-    [ValidateAntiForgeryToken]
     public async Task<PartialViewResult> OnPostSearch()
     {
         Countries = new();

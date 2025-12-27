@@ -3,15 +3,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.BulkUpdate;
 
-public class Index : PageModel
+[ValidateAntiForgeryToken]
+public class Index(IContactService service) : PageModel
 {
-    private readonly IContactService service;
-
-    public Index(IContactService service)
-    {
-        this.service = service;
-    }
-
     public List<Contact>? ContactTableRows { get; set; }
 
     public void OnGet()
@@ -20,7 +14,6 @@ public class Index : PageModel
     }
 
 
-    [ValidateAntiForgeryToken]
     public PartialViewResult OnPutActivate(int[] ids)
     {
         foreach (var id in ids)
@@ -33,7 +26,6 @@ public class Index : PageModel
         return Partial("_tbody", models.ToList());
     }
 
-    [ValidateAntiForgeryToken]
     public PartialViewResult OnPutDeactivate(int[] ids)
     {
         foreach (var id in ids)

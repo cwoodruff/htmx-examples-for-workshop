@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.FileUpload;
 
+[ValidateAntiForgeryToken]
 public class IndexModel : PageModel
 {
     public void OnGet()
@@ -12,7 +13,6 @@ public class IndexModel : PageModel
 
     [BindProperty, Display(Name = "File")] public IFormFile UploadedFile { get; set; }
 
-    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostUpload()
     {
         Task.Delay(1200);
@@ -20,7 +20,6 @@ public class IndexModel : PageModel
         return Partial("_javascript", UploadedFile);
     }
 
-    [ValidateAntiForgeryToken]
     public PartialViewResult OnPostUpload2()
     {
         Task.Delay(1200);
