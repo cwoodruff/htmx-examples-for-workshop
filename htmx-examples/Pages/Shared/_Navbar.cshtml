@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion d-flex flex-column" id="accordionSidebar" style="min-height: 100vh">
 
     <!-- Sidebar - Brand -->
     <a asp-page="/Index" class="sidebar-brand d-flex align-items-center justify-content-center" hx-boost="true">
@@ -129,6 +129,10 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
+
+    <div class="mt-auto mb-3 sidebar-brand-text mx-3 text-white-50 small">
+        Version: @System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version?.ToString()
+    </div>
 
 </ul>
 <!-- End of Navbar -->
