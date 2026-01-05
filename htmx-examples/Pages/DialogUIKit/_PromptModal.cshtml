@@ -1,0 +1,39 @@
+@model htmx_examples.Pages.DialogUIKit.Index
+
+@* 
+    UIKit Prompt Modal.
+    Uses Hyperscript to:
+    1. Show the modal on load.
+    2. Focus the input field when the modal is shown.
+    3. Hide the modal on successful HTMX response.
+    4. Clean up the DOM after hiding.
+*@
+<div id="prompt-modal" class="uk-flex-top" uk-modal
+     _="on load call UIkit.modal(me).show() end
+        on shown
+            set input to me.querySelector('[autofocus]')
+            if input call input.focus() end
+        end
+        on htmx:beforeOnLoad from body
+            if detail.xhr.status >= 200 and detail.xhr.status < 300
+                call UIkit.modal(me).hide()
+            end
+        end
+        on hidden remove me">
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h2 class="uk-modal-title">UIKit Prompt</h2>
+        <form hx-get="?handler=PromptAction" hx-target="#prompt-result">
+            <div class="uk-margin">
+                <label class="uk-form-label" for="promptValue">Please enter your message:</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="promptValue" name="promptValue" type="text" placeholder="Your message..." required autofocus>
+                </div>
+            </div>
+            <p class="uk-text-right">
+                <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                <button class="uk-button uk-button-primary" type="submit">Submit</button>
+            </p>
+        </form>
+    </div>
+</div>

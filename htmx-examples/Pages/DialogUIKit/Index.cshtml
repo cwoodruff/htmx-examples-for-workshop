@@ -1,0 +1,73 @@
+@page
+@model htmx_examples.Pages.DialogUIKit.Index
+@{
+    ViewData["Title"] = "UIKit Dialog Demo";
+}
+
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="~/lib/uikit/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="~/lib/uikit/dist/js/uikit.min.js"></script>
+<script src="~/lib/uikit/dist/js/uikit-icons.min.js"></script>
+
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">UIKit Dialog Demo</h1>
+    <p class="mb-4">
+        This demo demonstrates how to use htmx with <strong>UIKit</strong> to create interactive "Confirm" and "Prompt" dialogs.
+        Similar to the Bootstrap demo, we use htmx to fetch modal content and Hyperscript to manage the UIKit modal lifecycle.
+    </p>
+
+    <div class="row">
+        <!-- UIKit Confirm Dialog Demo -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">UIKit Confirm Dialog</h6>
+                </div>
+                <div class="card-body">
+                    <p>Click the button below to trigger a UIKit confirmation modal.</p>
+                    
+                    <button class="uk-button uk-button-danger"
+                            hx-get="?handler=ConfirmModal"
+                            hx-target="#modal-container"
+                            hx-trigger="click"
+                            hx-swap="innerHTML">
+                        Open UIKit Confirm
+                    </button>
+
+                    <div id="confirm-result" class="mt-3">
+                        <!-- Server response will be swapped here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UIKit Prompt Dialog Demo -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">UIKit Prompt Dialog</h6>
+                </div>
+                <div class="card-body">
+                    <p>Click the button below to trigger a UIKit prompt modal that asks for input.</p>
+
+                    <button class="uk-button uk-button-primary"
+                            hx-get="?handler=PromptModal"
+                            hx-target="#modal-container"
+                            hx-trigger="click"
+                            hx-swap="innerHTML">
+                        Open UIKit Prompt
+                    </button>
+
+                    <div id="prompt-result" class="mt-3">
+                        <!-- Server response will be swapped here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container for UIKit modals -->
+<div id="modal-container"></div>

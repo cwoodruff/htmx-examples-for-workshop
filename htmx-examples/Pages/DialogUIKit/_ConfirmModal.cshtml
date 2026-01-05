@@ -1,0 +1,31 @@
+@model htmx_examples.Pages.DialogUIKit.Index
+
+@* 
+    UIKit Modal structure.
+    _ (Hyperscript) is used to:
+    1. Show the modal on load using UIkit.modal(me).show()
+    2. Hide the modal when HTMX successfully receives a response from the server.
+    3. Remove the modal from DOM when it is hidden to keep it clean.
+*@
+<div id="confirm-modal" class="uk-flex-top" uk-modal
+     _="on load call UIkit.modal(me).show() end
+        on htmx:beforeOnLoad from body
+            if detail.xhr.status >= 200 and detail.xhr.status < 300
+                call UIkit.modal(me).hide()
+            end
+        end
+        on hidden remove me">
+    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <h2 class="uk-modal-title">Confirm Action</h2>
+        <p>Are you sure you want to proceed with this UIKit-powered action?</p>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary" type="button"
+                    hx-get="?handler=ConfirmAction"
+                    hx-target="#confirm-result">
+                Confirm
+            </button>
+        </p>
+    </div>
+</div>
