@@ -1,11 +1,10 @@
 ﻿@model IFormFile
 
-<form hx-encoding='multipart/form-data' hx-post='@Url.Page("Index", "Upload2")'
-      _ ="on htmx:xhr:progress(loaded, total) set #progress's value to (loaded/total)*100">
+<form id='form2' hx-encoding='multipart/form-data' hx-post='@Url.Page("Index", "Upload2")'>
     @Html.AntiForgeryToken()
     <div class="mb-3">
         <label asp-for="@Model" class="form-label">Hyperscript Upload</label>
-        <input name="UploadedFile" class="form-control" type="file">
+        <input name="UploadedFile" class="form-control" type="file" accept=".jpg,.jpeg,.png,.gif,.pdf,.txt,.doc,.docx">
     </div>
 
     <button class="btn btn-primary">

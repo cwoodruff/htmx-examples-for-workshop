@@ -30,10 +30,27 @@ app.UseHttpsRedirection();
 // Add security headers
 app.Use(async (context, next) =>
 {
+    // Content Security Policy - restricts resource loading to prevent XSS
+    context.Response.Headers.Append("Content-Security-Policy",
+        "default-src 'self'; " +
+        "script-src 'self'; " +
+        "style-src 'self' 'unsafe-inline'; " +
+        "img-src 'self' data:; " +
+        "font-src 'self'; " +
+        "connect-src 'self'; " +
+        "frame-ancestors 'none'; " +
+        "base-uri 'self'; " +
+        "form-action 'self'");
+
     context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
     context.Response.Headers.Append("X-Frame-Options", "DENY");
     context.Response.Headers.Append("X-XSS-Protection", "1; mode=block");
     context.Response.Headers.Append("Referrer-Policy", "strict-origin-when-cross-origin");
+
+    // Permissions Policy - restricts browser features
+    context.Response.Headers.Append("Permissions-Policy",
+        "geolocation=(), microphone=(), camera=()");
+
     await next();
 });
 

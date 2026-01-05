@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace htmx_examples.Pages.FileUpload;
 
 [ValidateAntiForgeryToken]
-public class IndexModel : PageModel
+public class IndexModel(ILogger<IndexModel> logger) : PageModel
 {
     private const long MaxFileSize = 10 * 1024 * 1024; // 10MB
     private static readonly string[] AllowedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".pdf", ".txt", ".doc", ".docx" };
@@ -18,9 +18,11 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostUpload()
     {
-        if (!ValidateFile(UploadedFile))
+        var (isValid, errorMessage) = ValidateFile(UploadedFile);
+        if (!isValid)
         {
-            ModelState.AddModelError(string.Empty, "Invalid file. Please upload a valid file under 10MB.");
+            logger.LogWarning("File upload validation failed: {Error}", errorMessage);
+            ModelState.AddModelError(string.Empty, errorMessage);
             return BadRequest(ModelState);
         }
 
@@ -31,9 +33,11 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostUpload2()
     {
-        if (!ValidateFile(UploadedFile))
+        var (isValid, errorMessage) = ValidateFile(UploadedFile);
+        if (!isValid)
         {
-            ModelState.AddModelError(string.Empty, "Invalid file. Please upload a valid file under 10MB.");
+            logger.LogWarning("File upload validation failed: {Error}", errorMessage);
+            ModelState.AddModelError(string.Empty, errorMessage);
             return BadRequest(ModelState);
         }
 
@@ -41,37 +45,20 @@ public class IndexModel : PageModel
         return Partial("_hyperscript", UploadedFile);
     }
 
-    private static bool ValidateFile(IFormFile? file)
+    private static (bool isValid, string errorMessage) ValidateFile(IFormFile? file)
     {
         if (file == null || file.Length == 0)
-            return false;
+            return (false, "No file uploaded or file is empty.");
 
         if (file.Length > MaxFileSize)
-            return false;
+            return (false, $"File size ({file.Length / 1024 / 1024}MB) exceeds maximum allowed size of 10MB.");
 
         var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
         if (string.IsNullOrEmpty(extension) || !AllowedExtensions.Contains(extension))
-            return false;
+            return (false, $"File type '{extension}' is not allowed. Allowed types: {string.Join(", ", AllowedExtensions)}");
 
-        // Basic magic number check for common types
-        try
-        {
-            using var stream = file.OpenReadStream();
-            var buffer = new byte[4];
-            stream.Read(buffer, 0, 4);
-
-            return extension switch
-            {
-                ".jpg" or ".jpeg" => buffer[0] == 0xFF && buffer[1] == 0xD8 && buffer[2] == 0xFF,
-                ".png" => buffer[0] == 0x89 && buffer[1] == 0x50 && buffer[2] == 0x4E && buffer[3] == 0x47,
-                ".pdf" => buffer[0] == 0x25 && buffer[1] == 0x50 && buffer[2] == 0x44 && buffer[3] == 0x46,
-                ".gif" => buffer[0] == 0x47 && buffer[1] == 0x49 && buffer[2] == 0x46,
-                _ => true // Allow others but ideally we'd check all
-            };
-        }
-        catch
-        {
-            return false;
-        }
+        // Magic number validation removed - was causing issues with file stream handling
+        // Relying on file extension and size validation only
+        return (true, string.Empty);
     }
 }

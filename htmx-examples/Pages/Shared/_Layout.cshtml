@@ -23,15 +23,7 @@
     
     <script src="~/lib/htmx/dist/htmx.min.js"></script>
     <script src="~/lib/hyperscript/dist/_hyperscript.min.js"></script>
-    <script>
-        htmx.logAll();
-        document.addEventListener("htmx:configRequest", (evt) => {
-            let token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
-            if (token) {
-                evt.detail.headers['RequestVerificationToken'] = token;
-            }
-        });
-    </script>
+    <script src="~/js/htmx-config.js" asp-append-version="true"></script>
 </head>
 <body id="page-top">
 

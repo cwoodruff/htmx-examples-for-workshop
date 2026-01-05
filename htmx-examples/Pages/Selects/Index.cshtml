@@ -30,7 +30,7 @@
                 <div>
                     <label class="control-label">Model</label>
 
-                    <select id="models" name="model" hx-on:change="if(this.value) alert('You selected: ' + this.value)">
+                    <select id="models" name="model">
                         <partial name="_modelSelector" model="@Model.ManufacturerModels"/>
                     </select>
                 </div>
@@ -42,3 +42,7 @@
     <!-- /.container-fluid -->
 </div>
 <!-- End of Main Content -->
+
+@section Scripts {
+    <script src="~/js/selects.js" asp-append-version="true"></script>
+}

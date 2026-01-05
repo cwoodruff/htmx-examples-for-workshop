@@ -13,14 +13,33 @@ public class Index(IContactService service) : PageModel
         ContactTableRows = service.Get().ToList();
     }
 
-    public PartialViewResult OnPutActivate(int[] ids)
+    public IActionResult OnPutActivate(int[] ids)
     {
         if (ids != null && ids.Length > 0)
         {
+            // Limit bulk operations to prevent abuse
+            if (ids.Length > 100)
+            {
+                ModelState.AddModelError("", "Cannot update more than 100 records at once");
+                return BadRequest(ModelState);
+            }
+
             foreach (var id in ids)
             {
-                // In a real application, you would verify that the current user 
-                // has permission to update these specific records.
+                // Verify the contact exists before updating
+                var contact = service.GetById(id);
+                if (contact == null)
+                {
+                    ModelState.AddModelError("", $"Contact with ID {id} not found");
+                    return NotFound(ModelState);
+                }
+
+                // In a production application, add authorization checks here:
+                // if (!User.IsInRole("Admin") && contact.OwnerId != User.GetUserId())
+                // {
+                //     return Forbid();
+                // }
+
                 service.Update(id, true);
             }
         }
@@ -34,14 +53,33 @@ public class Index(IContactService service) : PageModel
         return Partial("_tbody", models.ToList());
     }
 
-    public PartialViewResult OnPutDeactivate(int[] ids)
+    public IActionResult OnPutDeactivate(int[] ids)
     {
         if (ids != null && ids.Length > 0)
         {
+            // Limit bulk operations to prevent abuse
+            if (ids.Length > 100)
+            {
+                ModelState.AddModelError("", "Cannot update more than 100 records at once");
+                return BadRequest(ModelState);
+            }
+
             foreach (var id in ids)
             {
-                // In a real application, you would verify that the current user 
-                // has permission to update these specific records.
+                // Verify the contact exists before updating
+                var contact = service.GetById(id);
+                if (contact == null)
+                {
+                    ModelState.AddModelError("", $"Contact with ID {id} not found");
+                    return NotFound(ModelState);
+                }
+
+                // In a production application, add authorization checks here:
+                // if (!User.IsInRole("Admin") && contact.OwnerId != User.GetUserId())
+                // {
+                //     return Forbid();
+                // }
+
                 service.Update(id, false);
             }
         }

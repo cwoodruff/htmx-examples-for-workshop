@@ -20,6 +20,11 @@ public class ContactService : IContactService
         return contacts.Select(c => c.Value);
     }
 
+    public Contact? GetById(int id)
+    {
+        return contacts.TryGetValue(id, out var contact) ? contact : null;
+    }
+
     public void Update(int Id, bool status)
     {
         contacts[Id].Status = status;
