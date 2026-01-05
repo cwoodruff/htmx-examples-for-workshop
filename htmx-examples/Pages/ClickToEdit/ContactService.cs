@@ -19,7 +19,6 @@ public class ContactService : IContactService
 
     public void Update(int Id, Contact updatedContact)
     {
-        var old = contacts[Id];
-        old = updatedContact;
+        contacts[Id] = updatedContact;
     }
 }

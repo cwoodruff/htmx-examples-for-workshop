@@ -22,9 +22,9 @@ public class IndexModel : PageModel
         ManufacturerModels = MakeModel[Make];
     }
 
-    public List<String> ManufacturerMake { get; set; }
-    public List<String> ManufacturerModels { get; set; }
-    [FromQuery(Name = "make")] public string Make { get; set; }
+    public List<string> ManufacturerMake { get; set; } = new();
+    public List<string> ManufacturerModels { get; set; } = new();
+    [FromQuery(Name = "make")] public string Make { get; set; } = string.Empty;
 
     public PartialViewResult OnGetModels()
     {

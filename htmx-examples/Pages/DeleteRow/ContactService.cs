@@ -17,7 +17,7 @@ public class ContactService : IContactService
 
     public void Delete(int Id)
     {
-        contacts.RemoveAll(x => x.Id == Id);
+        contacts.Remove(contacts[Id]);
     }
 
     public IEnumerable<Contact> Get()

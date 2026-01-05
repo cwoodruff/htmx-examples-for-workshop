@@ -17,8 +17,11 @@ public class ContactService : IContactService
 
     public void Update(Contact updatedContact)
     {
-        var old = contacts[updatedContact.Id];
-        old = updatedContact;
+        var index = contacts.FindIndex(c => c.Id == updatedContact.Id);
+        if (index != -1)
+        {
+            contacts[index] = updatedContact;
+        }
     }
 
     public IEnumerable<Contact> Get()

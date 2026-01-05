@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace htmx_examples.Pages.EditRow;
 
+[ValidateAntiForgeryToken]
 public class IndexModel(IContactService contactService) : PageModel
 {
     public IList<Contact>? Contacts { get; set; }
@@ -28,8 +29,7 @@ public class IndexModel(IContactService contactService) : PageModel
         return Partial("_TableRow", contact);
     }
 
-    [ValidateAntiForgeryToken]
-    public PartialViewResult OnPut(Contact contact)
+    public PartialViewResult OnPutUpdate([FromForm] Contact contact)
     {
         contactService.Update(contact);
 

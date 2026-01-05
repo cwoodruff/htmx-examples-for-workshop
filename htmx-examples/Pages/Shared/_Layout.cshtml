@@ -23,7 +23,15 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/2.0.7/htmx.min.js" integrity="sha512-IisGoumHahmfNIhP4wUV3OhgQZaaDBuD6IG4XlyjT77IUkwreZL3T3afO4xXuDanSalZ57Un+UlAbarQjNZCTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hyperscript/0.9.14/_hyperscript.min.js" integrity="sha512-l43sZzpnAddmYhJyfPrgv46XhJvA95gsA28/+eW4XZLSekQ8wlP68i9f22KGkRjY0HNiZrLc5MXGo4z/tM2QNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>htmx.logAll();</script>
+    <script>
+        htmx.logAll();
+        document.addEventListener("htmx:configRequest", (evt) => {
+            let token = document.querySelector('input[name="__RequestVerificationToken"]')?.value;
+            if (token) {
+                evt.detail.headers['RequestVerificationToken'] = token;
+            }
+        });
+    </script>
 </head>
 <body id="page-top">
 

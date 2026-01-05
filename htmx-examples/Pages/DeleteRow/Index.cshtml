@@ -18,24 +18,27 @@
 
                 @if (Model?.Contacts?.Count() > 0)
                 {
-                    <div class="table-responsive">
-                        <table class="table table-bordered delete-row-example">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML swap:1s">
-                            @foreach (var contact in Model.Contacts)
-                            {
-                                <partial name="_TableRow" model="@contact"/>
-                            }
-                            </tbody>
-                        </table>
-                    </div>
+                    <form>
+                        @Html.AntiForgeryToken()
+                        <div class="table-responsive">
+                            <table class="table table-bordered delete-row-example">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody hx-confirm="Are you sure?" hx-target="closest tr" hx-swap="outerHTML swap:1s">
+                                @foreach (var contact in Model.Contacts)
+                                {
+                                    <partial name="_TableRow" model="@contact"/>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
                 }
 
             </div>

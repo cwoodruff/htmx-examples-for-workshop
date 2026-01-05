@@ -5,7 +5,7 @@
     <td>@Model.Email</td>
     <td>
         <button class="btn btn-danger"
-                hx-get="/EditRow/edit/@Model.Id"
+                hx-get="@Url.Page("Index", "Edit", new { Id = Model.Id })"
                 hx-trigger="click">
             Edit
         </button>

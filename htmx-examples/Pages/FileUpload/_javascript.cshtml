@@ -1,11 +1,19 @@
 ﻿@model IFormFile
-
-<form id='form' hx-encoding='multipart/form-data' hx-post='/FileUpload/index?handler=upload'
+<form id='form' hx-encoding='multipart/form-data' hx-post='@Url.Page("Index", "Upload")'
       hx-on:htmx:xhr:progress="htmx.find('#js_progress').setAttribute('value', event.detail.loaded / event.detail.total * 100)">
     @Html.AntiForgeryToken()
-    <input name="UploadedFile" asp-for="@Model">
+    <div class="mb-3">
+        <label asp-for="@Model" class="form-label">JavaScript Upload</label>
+        <input name="UploadedFile" class="form-control" type="file">
+    </div>
     <button class="btn btn-primary">
         Upload
     </button>
-    <progress id="js_progress" value='0' max='100'></progress>
+    <progress id="js_progress" value='0' max='100' class="mt-2"></progress>
+    @if (Model != null)
+    {
+        <div class="alert alert-success mt-2">
+            File uploaded: @Model.FileName
+        </div>
+    }
 </form>

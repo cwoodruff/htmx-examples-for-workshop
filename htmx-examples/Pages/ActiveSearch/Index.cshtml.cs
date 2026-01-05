@@ -19,12 +19,29 @@ public class IndexModel(IHttpClientFactory factory) : PageModel
     public async Task<PartialViewResult> OnPostSearch()
     {
         Countries = new();
-        var result = await _httpClient.GetStringAsync($"https://restcountries.com/v3.1/name/{SearchText}");
-        //var jsonstr = await result.Content.ReadAsStringAsync();
-        var json = JsonArray.Parse(result);
-        foreach (var country in json.AsArray())
+        try
         {
-            this.Countries.Add(new(country["name"]["common"].ToString()));
+            var response = await _httpClient.GetAsync($"https://restcountries.com/v3.1/name/{SearchText}");
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                var json = JsonArray.Parse(result);
+                if (json != null)
+                {
+                    foreach (var country in json.AsArray())
+                    {
+                        var name = country?["name"]?["common"]?.ToString();
+                        if (name != null)
+                        {
+                            this.Countries.Add(new(name));
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // Log error if necessary, but for this example we'll just return the empty list
         }
 
         return Partial("_searchResult", Countries);

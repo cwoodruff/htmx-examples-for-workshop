@@ -1,6 +1,7 @@
 ﻿@model Contact
 
-<form hx-put="/ClickToEdit/Index?handler=ReplaceContact" hx-target="this" hx-swap="outerHTML">
+<form hx-put="@Url.Page("Index", "ReplaceContact")" hx-target="this" hx-swap="outerHTML">
+    @Html.AntiForgeryToken()
     <div>
         <label asp-for="@Model.FirstName" class="control-label">First Name</label>
         <input asp-for="@Model.FirstName">
@@ -16,5 +17,5 @@
         <input asp-for="@Model.Email">
     </div>
     <button class="btn btn-primary">Submit</button>
-    <button class="btn btn-primary" hx-get="/ClickToEdit/Index?handler=DisplayContact">Cancel</button>
+    <button class="btn btn-primary" hx-get="@Url.Page("Index", "DisplayContact")">Cancel</button>
 </form>

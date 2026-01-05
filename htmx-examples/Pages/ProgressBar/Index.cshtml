@@ -16,9 +16,12 @@
 
                 <div hx-target="this" hx-swap="outerHTML">
                     <h3>Start Progress</h3>
-                    <button class="btn btn-primary" hx-post="/ProgressBar/StartJob">
-                        Start Job
-                    </button>
+                    <form>
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-primary" hx-post="@Url.Page("Index", "StartJob")" hx-include="closest form">
+                            Start Job
+                        </button>
+                    </form>
                 </div>
 
             </div>

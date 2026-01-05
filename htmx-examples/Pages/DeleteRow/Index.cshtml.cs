@@ -16,12 +16,6 @@ public class IndexModel(IContactService contactService) : PageModel
 
     public IActionResult OnPostContact()
     {
-        //contactService.Delete(this.Id);
-        return new OkResult();
-    }
-
-    public IActionResult OnDeleteContact()
-    {
         contactService.Delete(this.Id);
         return new OkResult();
     }

@@ -1,19 +1,19 @@
 ﻿@model Contact
 
-<tr hx-trigger='cancel' class='editing' hx-get="/EditRow/view/@Model.Id">
+<tr hx-trigger='cancel' class='editing' hx-get="@Url.Page("Index", "View", new { Id = Model.Id })">
     <td>
         <input type="hidden" asp-for="@Model.Id"/>
-        <input name='name' asp-for="@Model.Name">
+        <input asp-for="@Model.Name">
         @Html.AntiForgeryToken()
     </td>
     <td>
-        <input name='email' asp-for="@Model.Email">
+        <input asp-for="@Model.Email">
     </td>
     <td>
-        <button class="btn btn-danger" hx-get="/EditRow/view/@Model.Id">
+        <button class="btn btn-danger" hx-get="@Url.Page("Index", "View", new { Id = Model.Id })">
             Cancel
         </button>
-        <button class="btn btn-danger" hx-put="/EditRow/@Model.Id" hx-include="closest tr">
+        <button class="btn btn-danger" hx-put="@Url.Page("Index", "Update", new { Id = Model.Id })" hx-include="closest tr">
             Save
         </button>
     </td>

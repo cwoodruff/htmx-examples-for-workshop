@@ -6,7 +6,9 @@
     <td>@Model.Email</td>
     <td>@Model.Status </td>
     <td>
-        <button class="btn btn-danger" hx-delete="DeleteRow/Index/contact?Id=@Model.Id">
+        <button class="btn btn-danger"
+                hx-post="@Url.Page("Index", "Contact", new { Id = Model.Id })"
+                hx-include="closest form">
             Delete
         </button>
     </td>

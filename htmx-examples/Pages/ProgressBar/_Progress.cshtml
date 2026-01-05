@@ -2,10 +2,10 @@
     string Status = ViewData["Status"].ToString();
 }
 
-<div hx-trigger="done" hx-get="/ProgressBar/FinalizeJob" hx-swap="outerHTML" hx-target="this">
+<div hx-trigger="done" hx-get="@Url.Page("Index", "FinalizeJob")" hx-swap="outerHTML" hx-target="this">
     <h3 role="status" id="pblabel" tabindex="-1" autofocus>@Status</h3>
 
-    <div hx-get="/ProgressBar/JobStatus"
+    <div hx-get="@Url.Page("Index", "JobStatus")"
          hx-trigger="@(Status == "Running" ? "every 600ms" : "none")"
          hx-target="this"
          hx-swap="innerHTML">
@@ -14,8 +14,11 @@
 
     @if (Status == "Complete")
     {
-        <button id="restart-btn" class="btn btn-primary" hx-post="/ProgressBar/StartJob" classes="add show:600ms">
-            Restart Job
-        </button>
+        <form>
+            @Html.AntiForgeryToken()
+            <button id="restart-btn" class="btn btn-primary" hx-post="@Url.Page("Index", "StartJob")" hx-include="closest form" classes="add show:600ms">
+                Restart Job
+            </button>
+        </form>
     }
 </div>

@@ -22,12 +22,15 @@
                         <img src="/img/bars.svg" alt=""/> Searching...
                     </span>
                 </h3>
-                <input class="form-control" type="search"
-                       name="searchText" placeholder="Begin Typing To Search Users..."
-                       hx-post="/ActiveSearch/search"
-                       hx-trigger="keyup changed delay:500ms, search"
-                       hx-target="#search-results"
-                       hx-indicator=".htmx-indicator">
+                <form>
+                    @Html.AntiForgeryToken()
+                    <input class="form-control" type="search"
+                           name="searchText" placeholder="Begin Typing To Search Users..."
+                           hx-post="@Url.Page("Index", "Search")"
+                           hx-trigger="keyup changed delay:500ms, search"
+                           hx-target="#search-results"
+                           hx-indicator=".htmx-indicator">
+                </form>
 
                 <table class="table">
                     <thead>
