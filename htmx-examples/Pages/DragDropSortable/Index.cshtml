@@ -1,0 +1,83 @@
+@page
+@model htmx_examples.Pages.DragDropSortable.Index
+@{
+    ViewData["Title"] = "Drag and Drop Sortable Demo";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Drag and Drop Sortable Demo</h1>
+    <p class="mb-4">
+        This demo demonstrates how to integrate <strong>htmx</strong> with the <strong>Sortable.js</strong> library 
+        to create a reorderable list. When an item is dropped into a new position, htmx automatically sends the 
+        new order to the server using a POST request.
+    </p>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Sortable List</h6>
+                </div>
+                <div class="card-body">
+                    <p class="small text-muted mb-3">Drag the handles <i class="fas fa-grip-vertical"></i> to reorder items.</p>
+                    <div id="reorder-spinner" class="htmx-indicator spinner-border spinner-border-sm text-primary mb-3" role="status">
+                        <span class="sr-only">Updating...</span>
+                    </div>
+                    
+                    <!-- 
+                        The form container. 
+                        hx-post: The endpoint to send the new order to.
+                        hx-trigger: Triggered by a custom 'end' event fired by Sortable.js via Hyperscript.
+                        hx-target: We target the list body itself to update the display (e.g. order numbers).
+                    -->
+                    <form id="sortable-form" 
+                          hx-post="?handler=Reorder" 
+                          hx-trigger="end" 
+                          hx-target="#sortable-list"
+                          hx-swap="innerHTML"
+                          hx-indicator="#reorder-spinner">
+                        
+                        @Html.AntiForgeryToken()
+                        
+                        <div id="sortable-list" class="list-group"
+                             _="on load or htmx:afterSwap from #sortable-form
+                                    js(me)
+                                        if (me._sortable) {
+                                            me._sortable.destroy();
+                                        }
+                                        me._sortable = Sortable.create(me, {
+                                            animation: 150,
+                                            handle: '.handle',
+                                            onEnd: function() {
+                                                htmx.trigger('#sortable-form', 'end');
+                                            }
+                                        });
+                                    end">
+                            <partial name="_ItemList" model="Model.Items" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">How it works</h6>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Sortable.js</strong>: Handles the drag-and-drop UI and DOM manipulation.</li>
+                        <li><strong>Hyperscript</strong>: Initializes Sortable on the list element when it loads. 
+                            It also listens for Sortable's <code>onEnd</code> callback and dispatches a standard DOM <code>end</code> event.</li>
+                        <li><strong>htmx</strong>: Listens for the <code>end</code> event on the form. When triggered, it collects all <code>itemIds</code> 
+                            inputs (thanks to Sortable moving the DOM elements) and posts them to the server. 
+                            It also includes the <strong>ASP.NET Core Anti-Forgery Token</strong> in the request headers via a global configuration.</li>
+                        <li><strong>ASP.NET Core</strong>: The <code>OnPostReorder</code> handler receives the array of IDs and updates the sequence in the backend.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

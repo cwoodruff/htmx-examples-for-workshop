@@ -1,0 +1,121 @@
+@page
+@model htmx_examples.Pages.KeyBoardShortcuts.Index
+@{
+    ViewData["Title"] = "Keyboard Shortcuts Demo";
+}
+
+<div class="container-fluid" _="on keydown[(altKey or metaKey) and shiftKey and key == '1'] from window click #btn1
+                             on keydown[(altKey or metaKey) and shiftKey and key == '2'] from window click #btn2
+                             on keydown[(altKey or metaKey) and shiftKey and key == '3'] from window click #btn3
+                             on keydown[altKey and shiftKey and key == 'S'] from window 
+                                if target.tagName is not 'INPUT' and target.tagName is not 'TEXTAREA'
+                                    halt
+                                    focus() #search-input
+                                end">
+    <h1 class="h3 mb-2 text-gray-800">Keyboard Shortcuts Demo</h1>
+    <p class="mb-4">
+        This demo demonstrates how to use <strong>Hyperscript</strong> and <strong>htmx</strong> to create keyboard shortcuts.
+        Shortcuts are globally defined on the container but scoped to the window.
+    </p>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Global Shortcuts</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Shortcut</th>
+                                    <th>Action</th>
+                                    <th>Button (Clickable)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><kbd>Alt/⌘</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd></td>
+                                    <td>Trigger Action 1</td>
+                                    <td>
+                                        <button id="btn1" class="btn btn-success" 
+                                                hx-post="?handler=Action1" 
+                                                hx-target="#result">
+                                            Action 1
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt/⌘</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd></td>
+                                    <td>Trigger Action 2</td>
+                                    <td>
+                                        <button id="btn2" class="btn btn-info" 
+                                                hx-post="?handler=Action2" 
+                                                hx-target="#result">
+                                            Action 2
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt/⌘</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd></td>
+                                    <td>Trigger Action 3</td>
+                                    <td>
+                                        <button id="btn3" class="btn btn-warning" 
+                                                hx-post="?handler=Action3" 
+                                                hx-target="#result">
+                                            Action 3
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>Alt/⌘</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd></td>
+                                    <td>Focus Search Input</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" id="search-input" class="form-control" placeholder="Type something and press Enter..."
+                                                   name="q"
+                                                   hx-post="?handler=Search"
+                                                   hx-target="#result"
+                                                   hx-trigger="keyup[key=='Enter']">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="result" class="mt-4">
+                        <div class="alert alert-secondary">
+                            @Model.Message
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">How it works</h6>
+                </div>
+                <div class="card-body">
+                    <p>We use Hyperscript's <code>on keydown</code> event listener to intercept key presses globally:</p>
+                    <pre class="bg-light p-3 border"><code>&lt;div _="on keydown[(altKey or metaKey) and shiftKey and key == '1'] from window click #btn1"&gt;...&lt;/div&gt;</code></pre>
+                    <ul>
+                        <li><code>keydown[...]</code>: Filters the event by specific keys and modifiers.</li>
+                        <li><code>(altKey or metaKey) and shiftKey</code>: Supports both <kbd>Alt</kbd> (Windows/Linux) and <kbd>Command</kbd> (MacOS) combined with <kbd>Shift</kbd> to avoid conflicts with common browser shortcuts.</li>
+                        <li><code>from window</code>: Listens for the event on the global window object.</li>
+                        <li><code>click #btn1</code>: Triggers a click on the target element, which then fires its <code>hx-post</code>.</li>
+                        <li>The <kbd>Alt/⌘</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> shortcut uses a check to avoid focusing if the user is already typing in an input field.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

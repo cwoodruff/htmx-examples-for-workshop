@@ -1,0 +1,12 @@
+@model List<htmx_examples.Pages.DragDropSortable.Item>
+
+@foreach (var item in Model)
+{
+    <div class="list-group-item d-flex align-items-center">
+        <!-- Hidden input to store the ID. Sortable.js will collect these during reordering. -->
+        <input type="hidden" name="itemIds" value="@item.Id" />
+        <i class="fas fa-grip-vertical mr-3 text-gray-400 handle" style="cursor: grab;"></i>
+        <span>@item.Name</span>
+        <span class="ml-auto badge badge-secondary">Order: @item.Order</span>
+    </div>
+}

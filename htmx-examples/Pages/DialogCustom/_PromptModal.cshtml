@@ -1,0 +1,36 @@
+@model htmx_examples.Pages.DialogCustom.Index
+
+<div id="modal-overlay"
+     _="on load add .show to me
+        on htmx:beforeOnLoad from body
+            if detail.xhr.status >= 200 and detail.xhr.status < 300
+                remove .show from me
+                wait 300ms
+                remove me
+            end
+        end">
+    <div class="custom-modal">
+        <div class="modal-header d-flex justify-content-between align-items-center mb-3">
+            <h5 class="modal-title mb-0">Custom Prompt Input</h5>
+            <button type="button" class="btn-close" 
+                    _="on click remove .show from #modal-overlay then wait 300ms then remove #modal-overlay"></button>
+        </div>
+        <form hx-get="?handler=PromptAction" hx-target="#prompt-result">
+            <div class="modal-body mb-4">
+                <div class="mb-3">
+                    <label for="promptValue" class="form-label">Enter some text:</label>
+                    <input type="text" class="form-control" id="promptValue" name="promptValue" 
+                           placeholder="Type something..." required autofocus
+                           _="on load focus() me">
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary mr-2" 
+                        _="on click remove .show from #modal-overlay then wait 300ms then remove #modal-overlay">Cancel</button>
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

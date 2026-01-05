@@ -1,0 +1,100 @@
+@page
+@model htmx_examples.Pages.DialogCustom.Index
+@{
+    ViewData["Title"] = "Dialog (Modal) Custom Demo";
+}
+
+<style>
+    /* Basic styling for the custom modal overlay */
+    #modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1050;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    #modal-overlay.show {
+        opacity: 1;
+    }
+
+    /* Basic styling for the custom modal content */
+    .custom-modal {
+        background: white;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        max-width: 500px;
+        width: 90%;
+        transform: translateY(-20px);
+        transition: transform 0.3s ease;
+    }
+    
+    .show .custom-modal {
+        transform: translateY(0);
+    }
+</style>
+
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Dialog Custom Demo</h1>
+    <p class="mb-4">
+        This demo demonstrates how to create "Confirm" and "Prompt" dialogs using <strong>only HTMX and Hyperscript</strong>, 
+        without relying on external UI frameworks like Bootstrap or UIKit for the modal logic.
+    </p>
+
+    <div class="row">
+        <!-- Custom Confirm Dialog Demo -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Custom Confirm Dialog</h6>
+                </div>
+                <div class="card-body">
+                    <p>Click the button below to trigger a custom confirmation modal built from scratch.</p>
+                    
+                    <button class="btn btn-danger"
+                            hx-get="?handler=ConfirmModal"
+                            hx-target="#modal-container"
+                            hx-trigger="click"
+                            hx-swap="innerHTML">
+                        Custom Delete (Confirm)
+                    </button>
+
+                    <div id="confirm-result" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Prompt Dialog Demo -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Custom Prompt Dialog</h6>
+                </div>
+                <div class="card-body">
+                    <p>Click the button below to trigger a custom prompt modal built from scratch.</p>
+
+                    <button class="btn btn-primary"
+                            hx-get="?handler=PromptModal"
+                            hx-target="#modal-container"
+                            hx-trigger="click"
+                            hx-swap="innerHTML">
+                        Custom Input (Prompt)
+                    </button>
+
+                    <div id="prompt-result" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container for our custom modals -->
+<div id="modal-container"></div>
