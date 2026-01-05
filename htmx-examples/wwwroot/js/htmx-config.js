@@ -1,4 +1,4 @@
-// HTMX Configuration
+// htmx Configuration
 htmx.logAll();
 
 document.addEventListener("htmx:configRequest", (evt) => {

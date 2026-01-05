@@ -1,0 +1,40 @@
+@model htmx_examples.Pages.DialogBrowser.Index
+
+<div class="modal fade" id="promptModal" tabindex="-1" role="dialog" aria-labelledby="promptModalLabel" aria-hidden="true"
+     _="on load js(me) new bootstrap.Modal(me).show() end
+        on shown.bs.modal
+            set input to me.querySelector('[autofocus]')
+            if input js(input) input.focus() end
+        end
+        on htmx:beforeOnLoad from body
+            if detail.xhr.status >= 200 and detail.xhr.status < 300
+                js(me) bootstrap.Modal.getInstance(me).hide() end
+            end
+        end
+        on hidden.bs.modal remove me">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="promptModalLabel">Enter Your Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form hx-get="?handler=PromptAction" hx-target="#prompt-result">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="promptValue" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="promptValue" name="promptValue" placeholder="Enter your name here..." required autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <!-- 
+                        When the form is submitted, htmx will send the 'promptValue' to the PromptAction handler.
+                    -->
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

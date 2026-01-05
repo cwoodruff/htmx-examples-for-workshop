@@ -1,0 +1,35 @@
+@model htmx_examples.Pages.DialogBrowser.Index
+
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true"
+     _="on load js(me) new bootstrap.Modal(me).show() end
+        on htmx:beforeOnLoad from body
+            if detail.xhr.status >= 200 and detail.xhr.status < 300
+                js(me) bootstrap.Modal.getInstance(me).hide() end
+            end
+        end
+        on hidden.bs.modal remove me">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this item? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <!-- 
+                    When this button is clicked, htmx will:
+                    1. Post to the ConfirmAction handler.
+                    2. Target the #confirm-result div on the main page.
+                -->
+                <button type="button" class="btn btn-danger"
+                        hx-get="?handler=ConfirmAction"
+                        hx-target="#confirm-result">
+                    Yes, Delete It
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

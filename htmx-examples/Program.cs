@@ -33,7 +33,7 @@ app.Use(async (context, next) =>
     // Content Security Policy - restricts resource loading to prevent XSS
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self'; " +
+        "script-src 'self' 'unsafe-eval' 'sha256-ABd4mnyFmsUs/7GnODZv0/vJ76/bkooEjNtziNOudLs='; " +
         "style-src 'self' 'unsafe-inline'; " +
         "img-src 'self' data:; " +
         "font-src 'self'; " +

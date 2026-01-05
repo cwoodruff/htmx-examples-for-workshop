@@ -1,0 +1,95 @@
+@page
+@model htmx_examples.Pages.DialogBrowser.Index
+@{
+    ViewData["Title"] = "Dialog (Modal) Browser Demo";
+}
+
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Dialog Browser Demo</h1>
+    <p class="mb-4">
+        This demo demonstrates how to use htmx to create "Confirm" and "Prompt" dialogs using Bootstrap modals.
+        Instead of using the native browser <code>confirm()</code> or <code>prompt()</code>, we use htmx to load 
+        modal content from the server and handle the interactions.
+    </p>
+
+    <div class="row">
+        <!-- Confirm Dialog Demo -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Confirm Dialog</h6>
+                </div>
+                <div class="card-body">
+                    <p>Click the button below to trigger a custom confirmation modal.</p>
+                    
+                    <!-- 
+                        hx-get: Fetches the modal content from the server.
+                        hx-target: Specifies where to inject the fetched HTML (the modal container).
+                        hx-trigger: Triggered by a click.
+                    -->
+                    <button class="btn btn-danger"
+                            hx-get="?handler=ConfirmModal"
+                            hx-target="#modal-container"
+                            hx-trigger="click"
+                            hx-swap="innerHTML">
+                        Delete Something (Confirm)
+                    </button>
+
+                    <div id="confirm-result" class="mt-3">
+                        <!-- Server response will be swapped here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prompt Dialog Demo -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Prompt Dialog</h6>
+                </div>
+                <div class="card-body">
+                    <p>Click the button below to trigger a custom prompt modal that asks for input.</p>
+
+                    <button class="btn btn-primary"
+                            hx-get="?handler=PromptModal"
+                            hx-target="#modal-container"
+                            hx-trigger="click"
+                            hx-swap="innerHTML">
+                        Enter Your Name (Prompt)
+                    </button>
+
+                    <div id="prompt-result" class="mt-3">
+                        <!-- Server response will be swapped here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Native hx-confirm Demo -->
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Native Browser Confirm (hx-confirm)</h6>
+                </div>
+                <div class="card-body">
+                    <p>htmx also has a built-in <code>hx-confirm</code> attribute that uses the native browser confirmation dialog.</p>
+                    
+                    <button class="btn btn-warning"
+                            hx-post="?handler=ConfirmAction"
+                            hx-confirm="Are you sure you want to perform this native action?"
+                            hx-target="#native-result">
+                        Native Confirm Action
+                    </button>
+
+                    <div id="native-result" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container for modals -->
+<div id="modal-container"></div>
