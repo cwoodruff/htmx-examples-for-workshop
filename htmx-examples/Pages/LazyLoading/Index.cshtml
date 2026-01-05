@@ -15,9 +15,33 @@
                 <h4 class="m-0 font-weight-bold text-primary">Lazy Loading</h4>
             </div>
             <div class="card-body">
+                <p class="mb-4">
+                    This page demonstrates how HTMX can be used for <strong>Lazy Loading</strong>. 
+                    The dashboard components below are loaded asynchronously after the initial page load, 
+                    simulating heavy background processes.
+                </p>
 
-                <div hx-get="/LazyLoading/Index?handler=graph" hx-trigger="load">
-                    <img alt="Result loading..." class="htmx-indicator" width="150" src="https://htmx.org/img/bars.svg"/>
+                <div class="row">
+                    <div class="col-md-7">
+                        <!-- Sales Chart Widget -->
+                        <div hx-get="/LazyLoading/Index?handler=SalesChart" 
+                             hx-trigger="load">
+                            <div class="text-center p-5 border rounded bg-light">
+                                <div class="spinner-border text-primary mb-2" role="status"></div>
+                                <p>Loading Sales Data...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <!-- Recent Activity Widget -->
+                        <div hx-get="/LazyLoading/Index?handler=RecentActivity" 
+                             hx-trigger="load">
+                            <div class="text-center p-5 border rounded bg-light">
+                                <div class="spinner-border text-secondary mb-2" role="status"></div>
+                                <p>Checking for updates...</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -25,10 +25,96 @@
                     <!-- Card Header -->
                     <div
                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h4 class="m-0 font-weight-bold text-primary">Information</h4>
+                        <h4 class="m-0 font-weight-bold text-primary"></h4>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
+
+                        <h3 id="modern-web-interactivity-with-htmx-an-overview-of-our-asp-net-core-demos">Modern Web
+                            Interactivity with HTMX: An Overview of the ASP.NET Core Demos</h3>
+                        <p>In the world of modern web development, there&#39;s often a perceived requirement to use
+                            heavy JavaScript frameworks to achieve a smooth, reactive user experience. However, <a
+                                href="https://htmx.org/">htmx</a> offers a powerful alternative by allowing you to
+                            access modern browser features directly from HTML, without sacrificing the simplicity of
+                            server-side rendering with ASP.NET Core Razor Pages.</p>
+                        <p>This project serves as a comprehensive workshop for understanding how HTMX can transform
+                            traditional web applications. Below is an overview of the key demos included in this
+                            collection and the reasoning behind each pattern.</p>
+                        <h4 id="what-is-htmx-">What is HTMX?</h4>
+                        <p>HTMX is a library that allows you to access AJAX, CSS Transitions, WebSockets, and Server
+                            Sent Events directly in HTML using attributes. It follows the &quot;Hypermedia as the Engine
+                            of Application State&quot; (HATEOAS) principle, where the server returns HTML fragments
+                            rather than JSON. This reduces complexity by keeping your state and logic on the server.</p>
+                        <h4 id="why-htmx-with-asp-net-core-">Why HTMX with ASP.NET Core?</h4>
+                        <p>ASP.NET Core Razor Pages is a natural fit for HTMX. Since HTMX expects HTML fragments, you
+                            can use <strong>Partial Views</strong> and <strong>Named Page Handlers</strong> to return
+                            exactly what the client needs, avoiding full page reloads and keeping your C# code clean and
+                            centralized.</p>
+                        <h3 id="the-demo-collection">The Demo Collection</h3>
+                        <h5 id="1-data-interaction-patterns">1. Data Interaction Patterns</h5>
+                        <p>These demos showcase how to handle common data-driven tasks with minimal overhead:</p>
+                        <ul>
+                            <li><strong>Active Search</strong>: Triggers a search request as the user types, updating
+                                the results table in real-time.
+                            </li>
+                            <li><strong>Bulk Update</strong>: Demonstrates selecting multiple rows to perform a
+                                collective action, like updating status or deleting.
+                            </li>
+                            <li><strong>Click To Edit / Edit Row</strong>: Implements inline editing patterns where a
+                                row or a detail view toggles between &quot;view&quot; and &quot;edit&quot; modes without
+                                a page refresh.
+                            </li>
+                            <li><strong>Delete Row</strong>: Shows how to remove data from the UI and server with a
+                                simple AJAX request and smooth CSS transitions.
+                            </li>
+                        </ul>
+                        <h5 id="2-advanced-loading-techniques">2. Advanced Loading Techniques</h5>
+                        <p>Improve perceived performance by loading only what is necessary:</p>
+                        <ul>
+                            <li><strong>Lazy Loading</strong>: Defers the loading of heavy components (like charts)
+                                until after the initial page shell is rendered.
+                            </li>
+                            <li><strong>Infinite Scroll &amp; Click To Load</strong>: Alternatives to traditional
+                                pagination that provide a seamless &quot;feed-like&quot; experience for large datasets.
+                            </li>
+                            <li><strong>Progress Bar</strong>: Handles long-running server tasks by polling for status
+                                updates and updating a visual progress indicator.
+                            </li>
+                        </ul>
+                        <h5 id="3-enhanced-ui-components">3. Enhanced UI Components</h5>
+                        <p>Bringing desktop-like interactivity to the browser:</p>
+                        <ul>
+                            <li><strong>Dialogs (Browser, UIKit, Custom)</strong>: Explore three ways to handle
+                                modals—using native browser alerts, framework-specific components, or fully custom
+                                HTML/CSS modals.
+                            </li>
+                            <li><strong>Tabs</strong>: Implements a tabbed interface where content is swapped
+                                dynamically, reducing the initial payload.
+                            </li>
+                            <li><strong>Inline Validation</strong>: Provides immediate feedback on form fields (e.g.,
+                                &quot;Email already exists&quot;) as the user moves between inputs.
+                            </li>
+                            <li><strong>Drag &amp; Drop Sortable</strong>: Integrates with libraries like SortableJS to
+                                allow reordering of lists, with the new order saved back to the server.
+                            </li>
+                            <li><strong>Keyboard Shortcuts</strong>: Demonstrates how to trigger HTMX actions using
+                                global or context-sensitive key presses.
+                            </li>
+                        </ul>
+                        <h2 id="the-purpose-of-these-demos">The Purpose of These Demos</h2>
+                        <p>The goal of this workshop is to prove that <strong>you don&#39;t always need a SPA</strong>.
+                            By leveraging HTMX, you can:</p>
+                        <ol>
+                            <li><strong>Reduce Complexity</strong>: Eliminate the need for complex state management on
+                                the frontend.
+                            </li>
+                            <li><strong>Stay in C#</strong>: Keep your business logic in your Razor Page handlers.</li>
+                            <li><strong>Improve Performance</strong>: Send only the HTML that changes, reducing
+                                bandwidth and improving responsiveness.
+                            </li>
+                        </ol>
+                        <p>Explore the sidebar to dive into each demo!</p>
+
 
                     </div>
                 </div>
