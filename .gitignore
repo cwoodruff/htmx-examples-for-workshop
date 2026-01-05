@@ -469,4 +469,5 @@ node_modules
 .idea/runConfigurations/
 
 **/.DS_Store
-DS_Store
+.DS_Store
+htmx-examples/.DS_Store
