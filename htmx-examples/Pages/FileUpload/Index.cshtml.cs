@@ -50,6 +50,28 @@ public class IndexModel : PageModel
             return false;
 
         var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
-        return !string.IsNullOrEmpty(extension) && AllowedExtensions.Contains(extension);
+        if (string.IsNullOrEmpty(extension) || !AllowedExtensions.Contains(extension))
+            return false;
+
+        // Basic magic number check for common types
+        try
+        {
+            using var stream = file.OpenReadStream();
+            var buffer = new byte[4];
+            stream.Read(buffer, 0, 4);
+
+            return extension switch
+            {
+                ".jpg" or ".jpeg" => buffer[0] == 0xFF && buffer[1] == 0xD8 && buffer[2] == 0xFF,
+                ".png" => buffer[0] == 0x89 && buffer[1] == 0x50 && buffer[2] == 0x4E && buffer[3] == 0x47,
+                ".pdf" => buffer[0] == 0x25 && buffer[1] == 0x50 && buffer[2] == 0x44 && buffer[3] == 0x46,
+                ".gif" => buffer[0] == 0x47 && buffer[1] == 0x49 && buffer[2] == 0x46,
+                _ => true // Allow others but ideally we'd check all
+            };
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

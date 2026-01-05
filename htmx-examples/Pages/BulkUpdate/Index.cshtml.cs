@@ -15,25 +15,42 @@ public class Index(IContactService service) : PageModel
 
     public PartialViewResult OnPutActivate(int[] ids)
     {
-        foreach (var id in ids)
-            service.Update(id, true);
+        if (ids != null && ids.Length > 0)
+        {
+            foreach (var id in ids)
+            {
+                // In a real application, you would verify that the current user 
+                // has permission to update these specific records.
+                service.Update(id, true);
+            }
+        }
+
         var models = service.Get();
         foreach (var m in models)
-            if (ids.Contains(m.Id))
-                m.Updated = true;
-            else m.Updated = false;
+        {
+            m.Updated = ids != null && ids.Contains(m.Id);
+        }
+
         return Partial("_tbody", models.ToList());
     }
 
     public PartialViewResult OnPutDeactivate(int[] ids)
     {
-        foreach (var id in ids)
-            service.Update(id, false);
+        if (ids != null && ids.Length > 0)
+        {
+            foreach (var id in ids)
+            {
+                // In a real application, you would verify that the current user 
+                // has permission to update these specific records.
+                service.Update(id, false);
+            }
+        }
+
         var models = service.Get();
         foreach (var m in models)
-            if (ids.Contains(m.Id))
-                m.Updated = true;
-            else m.Updated = false;
+        {
+            m.Updated = ids != null && ids.Contains(m.Id);
+        }
 
         return Partial("_tbody", models.ToList());
     }
