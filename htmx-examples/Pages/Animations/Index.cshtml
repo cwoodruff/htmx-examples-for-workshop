@@ -1,0 +1,287 @@
+@page
+@model htmx_examples.Pages.Animations.IndexModel
+
+@{
+    ViewData["Title"] = "Animations";
+}
+
+<style>
+    .smooth {
+        transition: all 1s ease-in;
+    }
+
+    .fade-me-out.htmx-swapping {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
+
+    #fade-demo.htmx-swapping .fade-me-out {
+        opacity: 0;
+        transition: opacity 1s ease-out;
+    }
+
+    /* Fade In on Addition */
+    .fade-in.htmx-added {
+        opacity: 0;
+    }
+    .fade-in {
+        opacity: 1;
+        transition: opacity 1s ease-in;
+    }
+
+    /* Slide and Expand */
+    .slide-it {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.5s ease-in-out;
+    }
+    .slide-it.htmx-added {
+        max-height: 0;
+    }
+    .slide-it:not(.htmx-added) {
+        max-height: 200px;
+    }
+
+    /* Crossfade Swap */
+    .crossfade-container {
+        position: relative;
+        height: 100px;
+    }
+    .crossfade-item {
+        position: absolute;
+        width: 100%;
+        transition: opacity 1s ease-in-out;
+    }
+    .crossfade-item.htmx-added {
+        opacity: 0;
+    }
+    .crossfade-item.htmx-swapping {
+        opacity: 0;
+    }
+
+    /* Validation Shake */
+    .shake {
+        animation: shake 0.5s;
+    }
+    @@keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        75% { transform: translateX(-10px); }
+    }
+
+    /* Indicator Morphing */
+    .morph-btn {
+        transition: all 0.3s ease;
+    }
+    .morph-btn.htmx-request {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        font-size: 0;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        animation: spin 1s linear infinite;
+    }
+    @@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    #color-demo {
+        width: 150px;
+        height: 150px;
+        background-color: blue;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 1s;
+    }
+</style>
+
+<!-- Main Content -->
+<div id="content">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">Animations</h4>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">
+                    htmx allows you to use CSS transitions to animate many parts of the request-response cycle. 
+                    Below are a few examples of how you can use htmx to trigger animations.
+                </p>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Color Change</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>Click the box to change its color using a CSS transition.</p>
+                                <div id="color-demo" 
+                                     hx-get="/Animations/Index?handler=ColorChange" 
+                                     hx-swap="outerHTML">
+                                    Click Me!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Fade Out on Swap</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>Click the button to fade out the element before it is removed.</p>
+                                <div id="fade-demo">
+                                    <div class="alert alert-info fade-me-out">
+                                        I will fade out when you click the button.
+                                    </div>
+                                    <button class="btn btn-danger"
+                                            hx-get="/Animations/Index?handler=FadeOut"
+                                            hx-swap="outerHTML swap:1s"
+                                            hx-target="#fade-demo">
+                                        Fade Me Out
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Fade In on Addition</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>New content fades in smoothly.</p>
+                                <button class="btn btn-success" 
+                                        hx-get="/Animations/Index?handler=FadeInContent" 
+                                        hx-target="#fade-in-container" 
+                                        hx-swap="afterbegin">
+                                    Add Content
+                                </button>
+                                <div id="fade-in-container" class="mt-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Slide and Expand</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>Content slides down when added.</p>
+                                <button class="btn btn-info" 
+                                        hx-get="/Animations/Index?handler=SlideContent" 
+                                        hx-target="#slide-container" 
+                                        hx-swap="afterbegin">
+                                    Expand
+                                </button>
+                                <div id="slide-container" class="mt-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Crossfade Swap</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>Seamlessly transition between old and new content.</p>
+                                <div class="crossfade-container d-flex justify-content-center">
+                                    <div id="crossfade-demo" class="crossfade-item alert alert-secondary">
+                                        Initial Content
+                                    </div>
+                                </div>
+                                <button class="btn btn-warning mt-5" 
+                                        hx-get="/Animations/Index?handler=CrossfadeContent" 
+                                        hx-target="#crossfade-demo" 
+                                        hx-swap="outerHTML swap:1s">
+                                    Swap Content
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Validation Shake</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>Enter "invalid" to see the shake animation.</p>
+                                <div id="shake-demo">
+                                    <input type="text" class="form-control mb-2" 
+                                           name="testInput" 
+                                           placeholder="Type 'invalid'..."
+                                           hx-get="/Animations/Index?handler=ValidateShake" 
+                                           hx-target="#shake-demo" 
+                                           hx-swap="outerHTML"
+                                           hx-trigger="keyup[key=='Enter']">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Indicator Morphing</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>The button morphs into a spinner during the request.</p>
+                                <button class="btn btn-primary morph-btn" 
+                                        hx-get="/Animations/Index?handler=MorphAction" 
+                                        hx-swap="none">
+                                    Submit Request
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="m-0 font-weight-bold text-primary">Request in Flight (Settling)</h6>
+                            </div>
+                            <div class="card-body text-center">
+                                <p>This example shows how to use the <code>htmx-settling</code> class to highlight new content.</p>
+                                <button class="btn btn-primary" 
+                                        hx-get="/Animations/Index?handler=NewContent" 
+                                        hx-target="#new-content-container" 
+                                        hx-swap="beforeend">
+                                    Add Content
+                                </button>
+                                <div id="new-content-container" class="mt-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
